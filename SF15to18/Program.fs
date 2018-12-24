@@ -17,10 +17,13 @@ let convertID (id: string) =
   |> String.Concat
   |> fun x -> id + x
 
+let convertArgvToID (argv: string []) =
+  if argv.Length > 0 && argv.[0].Length = 15
+    then convertID(argv.[0])
+    else "Please enter an ID of 15 chars"
+
 [<EntryPoint>]
 let main argv =
-  if argv.Length > 0 && argv.[0].Length = 15
-    then convertID argv.[0] 
-    else "Please enter an ID of 15 chars"
+  convertArgvToID(argv)
   |> printfn "%s"
   0
